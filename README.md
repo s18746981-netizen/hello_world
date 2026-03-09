@@ -2,7 +2,7 @@
 #include <string.h>
 
 #define MAX_TASKS 50
-#define MAX_LENGTH 100
+0
 
 char tasks[MAX_TASKS][MAX_LENGTH];
 int taskCount = 0;

@@ -79,14 +79,7 @@ int main() {
             case 2:
                 viewTasks();
                 break;
-            case 3:
-                deleteTask();
-                break;
-            case 4:
-                printf("Exiting program...\n");
-                return 0;
-            default:
-                printf("Invalid choice!\n");
+       s
         }
     }
 

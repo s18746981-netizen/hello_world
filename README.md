@@ -1,2 +1,94 @@
-# hello_world
-my first repository 
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_TASKS 50
+#define MAX_LENGTH 100
+
+char tasks[MAX_TASKS][MAX_LENGTH];
+int taskCount = 0;
+
+void addTask() {
+    if (taskCount >= MAX_TASKS) {
+        printf("Task list is full!\n");
+        return;
+    }
+
+    printf("Enter a new task: ");
+    getchar(); 
+    fgets(tasks[taskCount], MAX_LENGTH, stdin);
+    tasks[taskCount][strcspn(tasks[taskCount], "\n")] = 0;
+
+    taskCount++;
+    printf("Task added successfully!\n");
+}
+
+void viewTasks() {
+    if (taskCount == 0) {
+        printf("No tasks available.\n");
+        return;
+    }
+
+    printf("\nYour Tasks:\n");
+    for (int i = 0; i < taskCount; i++) {
+        printf("%d. %s\n", i + 1, tasks[i]);
+    }
+}
+
+void deleteTask() {
+    int num;
+
+    if (taskCount == 0) {
+        printf("No tasks to delete.\n");
+        return;
+    }
+
+    viewTasks();
+    printf("Enter task number to delete: ");
+    scanf("%d", &num);
+
+    if (num < 1 || num > taskCount) {
+        printf("Invalid task number.\n");
+        return;
+    }
+
+    for (int i = num - 1; i < taskCount - 1; i++) {
+        strcpy(tasks[i], tasks[i + 1]);
+    }
+
+    taskCount--;
+    printf("Task deleted successfully!\n");
+}
+
+int main() {
+    int choice;
+
+    while (1) {
+        printf("\n--- TO DO LIST MENU ---\n");
+        printf("1. Add Task\n");
+        printf("2. View Tasks\n");
+        printf("3. Delete Task\n");
+        printf("4. Exit\n");
+
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                addTask();
+                break;
+            case 2:
+                viewTasks();
+                break;
+            case 3:
+                deleteTask();
+                break;
+            case 4:
+                printf("Exiting program...\n");
+                return 0;
+            default:
+                printf("Invalid choice!\n");
+        }
+    }
+
+    return 0;
+}
